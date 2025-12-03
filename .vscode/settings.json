@@ -10,12 +10,13 @@
     ".github/prompts/**/*.prompt.md": true
   },
   "chat.modeFilesLocations": {
-    ".github/chatmodes": true
+    ".github/chatmodes": true,
+    ".github/agents": true
   },
   "yaml.schemas": {
     "./scripts/linting/schemas/root-community-frontmatter.schema.json": [
       "README.md",
-      "CONTRIBUTING.md", 
+      "CONTRIBUTING.md",
       "CODE_OF_CONDUCT.md",
       "SECURITY.md",
       "SUPPORT.md",
