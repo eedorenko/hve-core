@@ -17,14 +17,14 @@ Multi-root workspaces are the **RECOMMENDED** method for consuming HVE-Core. Thi
 
 ## When to Use This Method
 
-✅ **Use this when:**
+Yes - **Use this when:**
 
 * You want a single configuration that works everywhere
 * Your project uses Codespaces or devcontainers
 * You need paths that work for the whole team
 * You want integrated source control across both projects
 
-❌ **Consider alternatives when:**
+No - **Consider alternatives when:**
 
 * Your team needs version-pinned dependencies → [Submodule](submodule.md)
 * You're developing HVE-Core itself → [Peer Clone](peer-clone.md)
@@ -152,10 +152,10 @@ The VS Code title bar should show your workspace name, not just the folder name.
 
 Multi-root workspaces use folder names for paths:
 
-| Path Style           | Example                                    | Recommended      |
-|----------------------|--------------------------------------------|------------------|
-| Folder name relative | `"HVE-Core Library/.github/chatmodes"`     | ✅ Yes            |
-| Absolute path        | `"/workspaces/hve-core/.github/chatmodes"` | ⚠️ Less portable |
+| Path Style           | Example                                    | Recommended             |
+|----------------------|--------------------------------------------|-------------------------|
+| Folder name relative | `"HVE-Core Library/.github/chatmodes"`     | Yes                     |
+| Absolute path        | `"/workspaces/hve-core/.github/chatmodes"` | Warning - Less portable |
 
 The folder names in your `.code-workspace` file (`"name": "HVE-Core Library"`) become path prefixes in settings.
 

@@ -16,14 +16,14 @@ Git-Ignored Folder installation places HVE-Core inside your project in a `.hve-c
 
 ## When to Use This Method
 
-✅ **Use this when:**
+Yes - **Use this when:**
 
 * You use local devcontainers (Docker Desktop)
 * You're working solo
 * You want HVE-Core auto-updated with container rebuilds
 * You want a self-contained project (no external dependencies)
 
-❌ **Consider alternatives when:**
+No - **Consider alternatives when:**
 
 * Your team needs version control → [Submodule](submodule.md)
 * You use Codespaces → [GitHub Codespaces](codespaces.md)
@@ -78,7 +78,7 @@ Add the HVE-Core folder to your `.gitignore`:
 $hveCoreFolder = ".hve-core"
 if (-not (Test-Path $hveCoreFolder)) {
     git clone https://github.com/microsoft/hve-core.git $hveCoreFolder
-    Write-Host "✅ Cloned HVE-Core to $hveCoreFolder"
+    Write-Host "Yes - Cloned HVE-Core to $hveCoreFolder"
 }
 ```
 
@@ -89,7 +89,7 @@ HVE_CORE_FOLDER=".hve-core"
 
 if [ ! -d "$HVE_CORE_FOLDER" ]; then
     git clone https://github.com/microsoft/hve-core.git "$HVE_CORE_FOLDER"
-    echo "✅ Cloned HVE-Core to $HVE_CORE_FOLDER"
+    echo "Yes - Cloned HVE-Core to $HVE_CORE_FOLDER"
 fi
 ```
 
@@ -220,15 +220,15 @@ The clone only happens if the folder doesn't exist. To force update:
 
 ## Limitations
 
-| Aspect           | Status                                                            |
-|------------------|-------------------------------------------------------------------|
-| Devcontainers    | ✅ Designed for this                                               |
-| Codespaces       | ⚠️ Works but not optimal (use [Codespaces method](codespaces.md)) |
-| Team sharing     | ⚠️ Each developer clones separately                               |
-| Portable paths   | ✅ Relative paths work                                             |
-| Version pinning  | ⚠️ Manual (modify clone command)                                  |
-| Disk usage       | ⚠️ Per-project copy                                               |
-| Setup complexity | ✅ Simple                                                          |
+| Aspect           | Status                                                                  |
+|------------------|-------------------------------------------------------------------------|
+| Devcontainers    | Yes - Designed for this                                                 |
+| Codespaces       | Warning - Works but not optimal (use [Codespaces method](codespaces.md))|
+| Team sharing     | Warning - Each developer clones separately                              |
+| Portable paths   | Yes - Relative paths work                                               |
+| Version pinning  | Warning - Manual (modify clone command)                                 |
+| Disk usage       | Warning - Per-project copy                                              |
+| Setup complexity | Yes - Simple                                                            |
 
 ## Next Steps
 

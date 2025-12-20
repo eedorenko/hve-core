@@ -1,4 +1,4 @@
-#!/usr/bin/env pwsh
+﻿#!/usr/bin/env pwsh
 
 <#
 .SYNOPSIS
@@ -208,19 +208,24 @@ try {
     }
     
     # Find the generated vsix file
-    $vsixFile = Get-ChildItem -Path $ExtensionDir -Filter "*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    $vsixFile = Get-ChildItem -Path $ExtensionDir -Filter "*.vsix" -ErrorAction SilentlyContinue | 
+        Sort-Object LastWriteTime -Descending | 
+        Select-Object -First 1
     
-    if ($vsixFile) {
-        Write-Host ""
-        Write-Host "✅ Extension packaged successfully!" -ForegroundColor Green
-        Write-Host "   File: $($vsixFile.Name)" -ForegroundColor Cyan
-        Write-Host "   Size: $([math]::Round($vsixFile.Length / 1KB, 2)) KB" -ForegroundColor Cyan
-        Write-Host "   Version: $packageVersion" -ForegroundColor Cyan
-    } else {
-        Write-Error "No .vsix file found after packaging"
-        exit 1
+    if (-not $vsixFile) {
+        throw "No .vsix file found after packaging"
     }
     
+    Write-Host ""
+    Write-Host "✅ Extension packaged successfully!" -ForegroundColor Green
+    Write-Host "   File: $($vsixFile.Name)" -ForegroundColor Cyan
+    Write-Host "   Size: $([math]::Round($vsixFile.Length / 1KB, 2)) KB" -ForegroundColor Cyan
+    Write-Host "   Version: $packageVersion" -ForegroundColor Cyan
+    
+} catch {
+    Write-Error "Packaging failed: $_"
+    $vsixFile = $null
+    throw
 } finally {
     Pop-Location
     
@@ -250,14 +255,13 @@ Write-Host ""
 Write-Host "🎉 Done!" -ForegroundColor Green
 Write-Host ""
 
-# Output for CI/CD consumption
-if ($env:GITHUB_OUTPUT) {
-    if ($vsixFile) {
-        "version=$packageVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
-        "vsix-file=$($vsixFile.Name)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
-    } else {
-        Write-Warning "Cannot write GITHUB_OUTPUT: vsix file not available"
-    }
+# Output for CI/CD consumption - only if packaging succeeded
+if ($env:GITHUB_OUTPUT -and $vsixFile) {
+    "version=$packageVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+    "vsix-file=$($vsixFile.Name)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+    Write-Host "✓ GitHub Actions output variables set" -ForegroundColor Gray
+} elseif ($env:GITHUB_OUTPUT -and -not $vsixFile) {
+    Write-Warning "VSIX file not available - skipping GitHub Actions output"
 }
 
 exit 0

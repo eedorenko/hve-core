@@ -16,14 +16,14 @@ Peer Directory Clone places HVE-Core as a sibling folder next to your project. T
 
 ## When to Use This Method
 
-✅ **Use this when:**
+Yes - **Use this when:**
 
 * You're using local VS Code (no devcontainer)
 * You're working solo on a project
 * You want the simplest possible setup
 * You're developing or testing HVE-Core itself
 
-❌ **Consider alternatives when:**
+No - **Consider alternatives when:**
 
 * You use devcontainers → [Git-Ignored Folder](git-ignored.md) or [Mounted Directory](mounted.md)
 * You use Codespaces → [GitHub Codespaces](codespaces.md)
@@ -159,15 +159,14 @@ Peer directory clone doesn't work in devcontainers because the container can't a
 
 ## Limitations
 
-| Aspect           | Status                              |
-|------------------|-------------------------------------|
-| Devcontainers    | ❌ Not supported                     |
-| Codespaces       | ❌ Not supported                     |
-| Team sharing     | ⚠️ Each developer clones separately |
-| Portable paths   | ⚠️ Breaks if project moves          |
-| Version pinning  | ⚠️ Manual (use git checkout)        |
-| Setup complexity | ✅ Very simple                       |
-| Update process   | ✅ Just git pull                     |
+| Aspect           | Status                                     |
+|------------------|--------------------------------------------|\n| Devcontainers    | No - Not supported                         |
+| Codespaces       | No - Not supported                         |
+| Team sharing     | Warning - Each developer clones separately |
+| Portable paths   | Warning - Breaks if project moves          |
+| Version pinning  | Warning - Manual (use git checkout)        |
+| Setup complexity | Yes - Very simple                          |
+| Update process   | Yes - Just git pull                        |
 
 ## Next Steps
 

@@ -17,14 +17,14 @@ Git submodules provide version-controlled, reproducible HVE-Core consumption. Ev
 
 ## When to Use This Method
 
-✅ **Use this when:**
+Yes - **Use this when:**
 
 * Your team needs reproducible setups (same version for everyone)
 * You want to pin HVE-Core to a specific version
 * Updates should be deliberate, reviewed commits
 * HVE-Core dependency should be tracked in version control
 
-❌ **Consider alternatives when:**
+No - **Consider alternatives when:**
 
 * You want automatic updates → [Multi-Root Workspace](multi-root.md)
 * You're a solo developer without version pinning needs → [Multi-Root Workspace](multi-root.md)
@@ -237,13 +237,13 @@ git commit
 
 ## Comparison with Other Methods
 
-| Aspect               | Submodule          | Multi-Root       | Clone        |
-|----------------------|--------------------|------------------|--------------|
-| Version controlled   | ✅ Yes              | ⚠️ Partial       | ❌ No         |
-| Team reproducibility | ✅ Same version     | ⚠️ May vary      | ⚠️ May vary  |
-| Update control       | ✅ Explicit commits | ⚠️ Automatic     | ⚠️ Automatic |
-| In workspace         | ✅ Subfolder        | ✅ Workspace root | ❌ External   |
-| Initial setup        | 🟡 Medium          | 🟡 Medium        | 🟢 Easy      |
+| Aspect               | Submodule              | Multi-Root             | Clone                  |
+|----------------------|------------------------|------------------------|------------------------|
+| Version controlled   | Yes                    | Warning - Partial      | No                     |
+| Team reproducibility | Yes - Same version     | Warning - May vary     | Warning - May vary     |
+| Update control       | Yes - Explicit commits | Warning - Automatic    | Warning - Automatic    |
+| In workspace         | Yes - Subfolder        | Yes - Workspace root   | No - External          |
+| Initial setup        | 🟡 Medium              | 🟡 Medium              | 🟢 Easy                |
 
 ## Next Steps
 

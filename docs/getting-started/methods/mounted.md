@@ -17,21 +17,21 @@ Mounted Directory installation shares a single HVE-Core clone across multiple de
 
 ## When to Use This Method
 
-✅ **Use this when:**
+Yes - **Use this when:**
 
 * You have multiple devcontainer projects needing HVE-Core
 * You want a single shared installation (one update applies everywhere)
 * You're comfortable with devcontainer configuration
 * You're using local devcontainers only (not Codespaces)
 
-❌ **Consider alternatives when:**
+No - **Consider alternatives when:**
 
 * You use Codespaces → [GitHub Codespaces](codespaces.md) (mounts don't work)
 * You want simpler setup → [Git-Ignored Folder](git-ignored.md)
 * Your team needs version control → [Submodule](submodule.md)
 * You need paths that work everywhere → [Multi-Root Workspace](multi-root.md)
 
-## ⚠️ Important Limitations
+## Warning - Important Limitations
 
 **This method does NOT work in GitHub Codespaces.** Codespaces doesn't support `${localWorkspaceFolder}` or bind mounts to host filesystem.
 
@@ -141,7 +141,7 @@ Update `.devcontainer/devcontainer.json`:
 
 ### Phase 3: Rebuild Container
 
-⚠️ **Container rebuild is required** to apply the mount.
+Warning - **Container rebuild is required** to apply the mount.
 
 1. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS)
 2. Type "Dev Containers: Rebuild Container"
@@ -280,16 +280,16 @@ This is expected. Codespaces doesn't support `${localWorkspaceFolder}` or host b
 
 ## Limitations
 
-| Aspect              | Status                                  |
-|---------------------|-----------------------------------------|
-| Devcontainers       | ✅ Full support                          |
-| Codespaces          | ❌ Not supported (no host access)        |
-| Team sharing        | ⚠️ Each developer clones on their host  |
-| Portable paths      | ⚠️ Absolute container paths             |
-| Version pinning     | ⚠️ Manual (use git checkout on host)    |
-| Shared installation | ✅ One clone serves all projects         |
-| Setup complexity    | ⚠️ High (multi-phase, requires rebuild) |
-| Update process      | ✅ Just git pull on host                 |
+| Aspect              | Status                                          |
+|---------------------|-------------------------------------------------|
+| Devcontainers       | Yes - Full support                              |
+| Codespaces          | No - Not supported (no host access)             |
+| Team sharing        | Warning - Each developer clones on their host   |
+| Portable paths      | Warning - Absolute container paths              |
+| Version pinning     | Warning - Manual (use git checkout on host)     |
+| Shared installation | Yes - One clone serves all projects             |
+| Setup complexity    | Warning - High (multi-phase, requires rebuild)  |
+| Update process      | Yes - Just git pull on host                     |
 
 ## Next Steps
 

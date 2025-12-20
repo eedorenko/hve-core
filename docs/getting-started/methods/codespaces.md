@@ -17,13 +17,13 @@ GitHub Codespaces requires a specific installation approach because traditional 
 
 ## When to Use This Method
 
-✅ **Use this when:**
+Yes - **Use this when:**
 
 * Your project runs exclusively in Codespaces
 * You want automatic HVE-Core setup for all users
 * You need zero-config onboarding for contributors
 
-❌ **Consider alternatives when:**
+No - **Consider alternatives when:**
 
 * You also need local devcontainer support → [Multi-Root Workspace](multi-root.md)
 * Your team needs version control → [Submodule](submodule.md)
@@ -33,10 +33,10 @@ GitHub Codespaces requires a specific installation approach because traditional 
 
 | Feature                    | Local Devcontainer  | GitHub Codespaces               |
 |----------------------------|---------------------|--|---------------------------------|
-| `${localWorkspaceFolder}`  | ✅ Resolves to host  | ❌ Not available                 |
-| Bind mounts to host        | ✅ Full support      | ❌ No host access                |
+| `${localWorkspaceFolder}`  | Yes - Resolves to host  | Not available                 |
+| Bind mounts to host        | Yes - Full support      | No host access                |
 | Persistent storage         | Host filesystem     | `/workspaces` only              |
-| User settings modification | ✅ Via file system   | ❌ Only via Settings Sync[^1]   |
+| User settings modification | Yes - Via file system   | No - Only via Settings Sync[^1]   |
 
 [^1]: User-level settings require Settings Sync. Workspace/container-level settings can still be configured via `devcontainer.json` using `customizations.vscode.settings`.
 
@@ -46,11 +46,11 @@ Codespaces has a specific storage model:
 
 ```text
 /
-├── workspaces/              # ✅ PERSISTENT - survives stops/restarts
+├── workspaces/              # Yes - PERSISTENT - survives stops/restarts
 │   ├── your-repo/           # Your cloned repository
 │   └── hve-core/            # 👈 HVE-Core goes here
-├── home/codespace/          # ⚠️ Semi-persistent (survives stops, not rebuilds)
-└── <system-dirs>/           # ❌ Not persistent
+├── home/codespace/          # Warning - Semi-persistent (survives stops, not rebuilds)
+└── <system-dirs>/           # Not persistent
 ```
 
 The `postCreateCommand` clones HVE-Core into `/workspaces/hve-core` where it persists across Codespace sessions.
@@ -144,8 +144,8 @@ git push
   },
   
   "postCreateCommand": {
-    "clone-hve-core": "if [ ! -d /workspaces/hve-core ]; then git clone --depth 1 https://github.com/microsoft/hve-core.git /workspaces/hve-core && echo '✅ HVE-Core cloned'; else echo '✅ HVE-Core present'; fi",
-    "verify": "test -d /workspaces/hve-core/.github/chatmodes && echo '✅ Verified' || echo '⚠️ Missing'"
+    "clone-hve-core": "if [ ! -d /workspaces/hve-core ]; then git clone --depth 1 https://github.com/microsoft/hve-core.git /workspaces/hve-core && echo 'Yes - HVE-Core cloned'; else echo 'Yes - HVE-Core present'; fi",
+    "verify": "test -d /workspaces/hve-core/.github/chatmodes && echo 'Yes - Verified' || echo 'Warning - Missing'"
   },
   
   "updateContentCommand": "cd /workspaces/hve-core && git pull --ff-only 2>/dev/null || echo 'Update skipped'",
@@ -292,15 +292,15 @@ Or modify postCreateCommand to always pull (see Auto-Update section).
 
 ## Limitations
 
-| Aspect              | Status                                   |
-|---------------------|------------------------------------------|
-| Codespaces          | ✅ Designed for this                      |
-| Local devcontainers | ⚠️ Works but consider other methods      |
-| Team sharing        | ✅ Auto-setup for all contributors        |
-| Portable paths      | ⚠️ Absolute paths only                   |
-| Version pinning     | ⚠️ Modify clone command for specific tag |
-| Offline support     | ❌ Requires network during creation       |
-| Setup complexity    | ✅ Low (just devcontainer.json)           |
+| Aspect              | Status                                       |
+|---------------------|----------------------------------------------|
+| Codespaces          | ✅ Yes - Designed for this                   |
+| Local devcontainers | ⚠️ Works but consider other methods          |
+| Team sharing        | ✅ Yes - Auto-setup for all contributors     |
+| Portable paths      | ⚠️ Absolute paths only                       |
+| Version pinning     | ⚠️ Modify clone command for specific tag     |
+| Offline support     | ❌ No - Requires network during creation     |
+| Setup complexity    | ✅ Yes - Low (just devcontainer.json)        |
 
 ## Version Pinning
 
